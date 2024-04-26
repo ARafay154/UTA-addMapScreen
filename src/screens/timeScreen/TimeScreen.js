@@ -3,6 +3,7 @@ import React from 'react'
 import { AppHeader, Label, MapForwardBtn, Pressable, TimePicker } from '../../components'
 import { SVG } from '../../assets/svg'
 import { COLOR, TEXT_STYLE, hp, wp } from '../../data/StyleGuides'
+import { SCREEN } from '../../data/enums'
 
 const TimeScreen = ({navigation}) => {
   return (
