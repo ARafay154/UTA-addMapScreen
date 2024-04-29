@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { COLOR, TEXT_STYLE, commonStyles, hp, wp } from '../../data/StyleGuides'
-import { AppHeader, Button, Label, Pressable } from '../../components'
+import { AppHeader, Button, Counter, Label, Pressable } from '../../components'
 import { SVG } from '../../assets/svg'
 import En from '../../data/locals/En'
 import { SCREEN, TAB } from '../../data/enums'
 
 const SearchCounterScreen = ({ navigation }) => {
-    const [seats, setSeats] = useState(0)
+    const [number, setNumber] = useState(0)
     return (
         <View style={styles.container}>
             <AppHeader
@@ -16,22 +16,12 @@ const SearchCounterScreen = ({ navigation }) => {
             <Label style={styles.titleText}>{En.numberOfSeat}</Label>
             <View style={styles.subContainer}>
 
-                <View style={styles.mainView}>
-                    <Pressable onPress={() => setSeats(prevSeats => prevSeats > 0 ? prevSeats - 1 : 0)}>
-                        <SVG.CounterMinus width={40} height={40} />
-                    </Pressable>
-
-                    <Label style={{ color: COLOR.white, fontSize: hp(12), width: wp(50), textAlign: 'center' }}>{seats}</Label>
-
-                    <Pressable onPress={() => setSeats((previous) => previous + 1)}>
-                        <SVG.CounterPlus width={40} height={40} />
-                    </Pressable>
-                </View>
+                <Counter number={number} setNumber={setNumber} icon={false}/>
                 <View style={styles.footer}>
 
                     <Button
                         text={En.confirm}
-                        onPress={() => navigation.navigate(TAB.SEARCH, { seats })}
+                        onPress={() => navigation.navigate(TAB.SEARCH, { number })}
                     />
                 </View>
             </View>
@@ -50,9 +40,7 @@ const styles = StyleSheet.create({
         ...TEXT_STYLE.smallTitleBold,
         textAlign: 'center'
     },
-    mainView: {
-        ...commonStyles.justifyView
-    },
+    
     subContainer: {
         paddingHorizontal: '5%',
         flex: 1,

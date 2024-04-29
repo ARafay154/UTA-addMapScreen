@@ -4,15 +4,21 @@ import { useNavigation } from '@react-navigation/native';
 import { COLOR, hp } from '../../../data/StyleGuides';
 import { Image } from '../../../components';
 import { IMAGES } from '../../../assets/images';
-import { SCREEN } from '../../../data/enums';
+import { SCREEN, TAB } from '../../../data/enums';
+import auth from '@react-native-firebase/auth';
 
 const SplashScreen = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate(SCREEN.LOGIN); 
-    }, 3000); 
+    const timer = setTimeout(async () => {
+      const user = auth().currentUser; // Check if user is already signed in
+      if (user) {
+        navigation.navigate(TAB.BOTTOM);
+      } else {
+        navigation.replace(SCREEN.LOGIN);
+      }
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [navigation]);
@@ -34,7 +40,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageView: {
-    height:hp(40),
-    width:hp(40),
+    height: hp(40),
+    width: hp(40),
   },
 });

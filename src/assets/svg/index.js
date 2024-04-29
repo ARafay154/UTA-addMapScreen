@@ -38,6 +38,8 @@ import CounterMinusActive from './counterMinusActive.svg'
 import BellIcon from './bellIcon.svg'
 import Electric from './electric.svg'
 import DownArrow from './downArrow.svg'
+import LineCircle from "./lineCircle.svg"
+import { Line } from 'react-native-svg'
 
 
 export const SVG = {
@@ -80,5 +82,6 @@ SeatCoupleLight,
 CounterMinusActive,
 BellIcon,
 Electric,
-DownArrow
+DownArrow,
+LineCircle
 }

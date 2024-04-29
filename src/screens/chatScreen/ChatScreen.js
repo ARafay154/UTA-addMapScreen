@@ -7,7 +7,7 @@ import { COLOR, TEXT_STYLE, commonStyles, hp, wp } from '../../data/StyleGuides'
 import { dummyMessages } from '../../data/dummyData'
 import LinearGradient from 'react-native-linear-gradient'
 
-const ChatScreen = ({navigation}) => {
+const ChatScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <AppHeader
@@ -26,7 +26,13 @@ const ChatScreen = ({navigation}) => {
 
             <ScrollView style={styles.chatDetailsContainer}>
                 {dummyMessages.map((message, index) => (
-                    <LinearGradient key={index} colors={[COLOR.blue, COLOR.pink]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} key={message.id} style={[styles.messageContainer, message.isSender ? styles.senderMessage : styles.receiverMessage]}>
+                    <LinearGradient
+                        key={index}
+                        colors={[COLOR.blue, COLOR.pink]}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 0 }}
+                        style={[styles.messageContainer, message.isSender ? styles.senderMessage : styles.receiverMessage]}>
+
                         <Label style={styles.messageText}>{message.text}</Label>
                     </LinearGradient>
                 ))}
@@ -110,8 +116,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: COLOR.blue,
     },
-    imageView:{
-        width:wp(15),
-        height:hp(10)
+    imageView: {
+        width: wp(15),
+        height: hp(10)
     }
 })

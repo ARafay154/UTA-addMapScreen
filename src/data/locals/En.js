@@ -114,6 +114,10 @@ export default {
     // best_places Screen
 
     "bestPlacesScreenTitle":"These are the best places to stop in those cities. OK for you?",
+    "bestPlacesUpperText":"Manchester",
+    "bestPlacesMiddleUpperText":"McDonald’s",
+    "bestPlacesMiddleBottomText":"Crewe",
+    "bestPlacesbottomText":"London",
 
 
     // passenger Screen
@@ -145,11 +149,31 @@ export default {
     "stopOver":"Stopover prices",
 
 
-    //return Ride Screen
+    //returnRide Screen
 
     "returnRideScreenHeading":"Coming back as well? Publish your return ride now!",
     "yes":"Yes, Sure!",
-    "no":"No, thanks"
+    "no":"No, thanks",
+
+    // helpScreen
+
+    "helpScreenTitle":"Help",
+    "howUtaWork":"How UTA works",
+    "helpCenter":"Help Center",
+    "contactUs":"Contact us",
+
+    // dataProtectionScreen
+    "dataProtectionScreenTitle":"Data protection",
+    "privacyPolicy":"Privacy Policy",
+    "cookieSetting":"Cookie settings",
+
+    // payoutMethod Screen
+
+    "bottomText1":"Data are collected by Comuto SA and transmitted to our payment provider to enable you to receive your payouts. To know more and know your rights, you can take a look at the",
+    "utaHighlighted":" UTA ",
+    "bottomText2":"Privacy Policy. By proceeding, you accept our payment provider’s",
+    "termsAndHighlighted":" terms and",
+    "conditionHighlighted":" conditions."
 
 
 

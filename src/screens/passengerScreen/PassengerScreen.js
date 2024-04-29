@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import { AppHeader, Checkbox, Label, MapForwardBtn, Pressable } from '../../components'
+import { AppHeader, Checkbox, Counter, Label, MapForwardBtn, Pressable } from '../../components'
 import { SVG } from '../../assets/svg'
 import En from '../../data/locals/En'
 import { COLOR, TEXT_STYLE, commonStyles, hp, wp } from '../../data/StyleGuides'
@@ -8,7 +8,7 @@ import { SCREEN } from '../../data/enums'
 
 const PassengerScreen = ({ navigation }) => {
 
-  const [passenger, setPassenger] = useState(0)
+  const [number, setNumber] = useState(0)
 
   return (
     <View style={styles.container}>
@@ -22,18 +22,7 @@ const PassengerScreen = ({ navigation }) => {
       <Label style={styles.heading}>{En.passengerScreenTitle}</Label>
 
       {/* counter */}
-
-      <View style={styles.mainView}>
-        <Pressable onPress={() => setPassenger(prevSeats => prevSeats > 0 ? prevSeats - 1 : 0)}>
-          <SVG.CounterMinusActive width={40} height={40} />
-        </Pressable>
-
-        <Label style={styles.totalPassenger}>{passenger}</Label>
-
-        <Pressable onPress={() => setPassenger((previous) => previous + 1)}>
-          <SVG.CounterPlus width={40} height={40} />
-        </Pressable>
-      </View>
+      <Counter number={number} setNumber={setNumber} style={styles.counterBlock} icon={false}/>
       {/* Counter End */}
 
       <Label style={[styles.optionBlock]}>{En.passengeroptions}</Label>
@@ -68,7 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.purple,
     flex: 1,
   },
-  header:{
+  header: {
     marginHorizontal: wp(4),
   },
   heading: {
@@ -94,22 +83,20 @@ const styles = StyleSheet.create({
     color: COLOR.lightGrey,
     fontSize: hp(1.75)
   },
-  mainView: {
-    ...commonStyles.justifyView,
-    paddingHorizontal: wp(8),
-    
+  counterBlock:{
+marginHorizontal:"5%"
   },
-  totalPassenger:{
-     ...TEXT_STYLE.text, 
-     fontSize: hp(12), 
-     width: wp(50), 
-     textAlign: 'center' ,
+  totalPassenger: {
+    ...TEXT_STYLE.text,
+    fontSize: hp(12),
+    width: wp(50),
+    textAlign: 'center',
   },
-  optionBlock:{
-    borderTopWidth:4,
-    borderColor:COLOR.lightGrey,
+  optionBlock: {
+    borderTopWidth: 4,
+    borderColor: COLOR.lightGrey,
     ...TEXT_STYLE.title,
-    paddingHorizontal:wp(8),
-    paddingTop:hp(3)
+    paddingHorizontal: wp(8),
+    paddingTop: hp(3)
   }
 })

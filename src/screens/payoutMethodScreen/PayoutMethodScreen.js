@@ -27,6 +27,12 @@ const PayoutMethodScreen = ({ navigation }) => {
                     <SVG.ForwardActive />
                 </Pressable>
             </View>
+            <Label style={styles.bottomText}>{En.bottomText1}
+            <Label style={styles.utaText}>{En.utaHighlighted}</Label>
+            <Label style={styles.bottomText}>{En.bottomText2}</Label>
+            <Label style={styles.termsText}>{En.termsAndHighlighted}</Label>
+            <Label style={styles.conditionText}>{En.conditionHighlighted}</Label>
+            </Label>
         </Scrollable>
     )
 }
@@ -63,5 +69,25 @@ const styles = StyleSheet.create({
     },
     palStyle: {
         ...commonStyles.justifyView,
+    },
+    bottomText:{
+        paddingHorizontal: '5%',
+        ...TEXT_STYLE.smallText,
+        marginTop:'auto',
+        marginBottom:hp(5)
+    },
+    utaText:{
+        ...TEXT_STYLE.smallTextBold,
+        color:COLOR.pink
+    },
+    termsText:{
+        ...TEXT_STYLE.smallTextBold,
+        color:COLOR.pink,
+    },
+    conditionText:{
+        ...TEXT_STYLE.smallTextBold,
+        color:COLOR.blue
     }
+
+   
 })

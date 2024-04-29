@@ -1,27 +1,63 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Alert, StyleSheet, Text, View } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { Button, Checkbox, Image, Input, Label, Pressable, Scrollable } from '../../../components'
 import { COLOR, hp, TEXT_STYLE, commonStyles } from '../../../data/StyleGuides'
 import { IMAGES } from '../../../assets/images'
 import En from '../../../data/locals/En'
 import { KEYBOARD_TYPE, SCREEN, TAB } from '../../../data/enums'
+import auth from '@react-native-firebase/auth';
+import { useIsFocused } from '@react-navigation/native'; 
+import { login } from '../../../services/AuthServices'
+
 
 const LoginScreen = ({ navigation }) => {
+    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const isFocused = useIsFocused();
+
+    // useEffect to clear fields when screen is focused
+    useEffect(() => {
+        if (!isFocused) {
+            setEmail('');
+            setPassword('');
+        }
+    }, [isFocused]); 
+
+    const handleLogin = () => {
+        setLoading(true);
+        login(email, password)
+            .then(() => {
+                navigation.navigate(TAB.BOTTOM);
+            })
+            .catch((error) => {
+                Alert.alert(error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    };
+
     return (
         <Scrollable containerStyle={{ height: hp(100) }}>
             <View style={styles.container}>
                 <View>
-
                     <Image src={IMAGES.SmallLogo} style={styles.logoView} />
                     <Label style={styles.emailText}>{En.email}</Label>
                     <Input
                         placeholder={En.enterEmail}
                         keyboard={KEYBOARD_TYPE.EMAIL}
+                        value={email}
+                        onChange={(e) => setEmail(e)}
                     />
                     <Label style={styles.passwordText}>{En.password}</Label>
                     <Input
                         isPassword
                         placeholder={En.enterPassword}
+                        value={password}
+                        onChange={(e) => setPassword(e)}
                     />
                     <View style={styles.checkView}>
                         <Checkbox
@@ -34,12 +70,13 @@ const LoginScreen = ({ navigation }) => {
                     </View>
                     <View style={styles.footer}>
                         <Button
-                        onPress={()=>navigation.navigate(TAB.BOTTOM)}
+                            onPress={() => handleLogin()}
                             text={En.signIn}
+                            isLoading={loading}
                         />
                         <View style={{ ...commonStyles.horizontalView, alignSelf: 'center' }}>
                             <Label>{En.donotAccount}</Label>
-                            <Pressable onPress={()=>navigation.navigate(SCREEN.SIGN_UP)}>
+                            <Pressable onPress={() => navigation.navigate(SCREEN.SIGN_UP)}>
                                 <Label style={styles.signUpText}> {En.signUp}</Label>
                             </Pressable>
                         </View>

@@ -5,7 +5,7 @@ export const SCREEN = {
   SIGN_UP: 'SignUpScreen',
   CHANGE_PASSWORD: 'ChangePasswordScreen',
   DATA_PROTECTION: 'DataProtectionScreen',
-  Help: 'HelpScreen',
+  HELP: 'HelpScreen',
   PAYOUT_METHOD: 'PayoutMethodScreen',
   GOING_FROM: 'GoingFromScreen',
   GOING_TO: 'GoingToScreen',

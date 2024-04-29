@@ -42,7 +42,7 @@ export const payoutData = [
 
 export const rateData = [
     { text: En.rateApp, icon: <SVG.ForwardActive /> },
-    { text: En.help, icon: <SVG.ForwardActive />, route: SCREEN.Help },
+    { text: En.help, icon: <SVG.ForwardActive />, route: SCREEN.HELP },
     { text: En.termCondition, icon: <SVG.ForwardActive /> },
     { text: En.dataProtection, icon: <SVG.ForwardActive />, route: SCREEN.DATA_PROTECTION },
 ]
@@ -108,6 +108,12 @@ export const stopOverData =[
     {name:En.Northampton},
     {name:En.Luton},
     {name:En.Watford},
+]
+
+export const helpScreenData =[
+    {text:En.howUtaWork, route:""},
+    {text:En.helpCenter,route:""},
+    {text:En.contactUs,route:""},
 ]
 
 

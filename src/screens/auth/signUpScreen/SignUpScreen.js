@@ -1,12 +1,43 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Alert, StyleSheet, Text, View } from 'react-native'
+import React, { useState,useEffect } from 'react'
 import { Button, Checkbox, Image, Input, Label, Pressable, Scrollable } from '../../../components'
 import { COLOR, hp, TEXT_STYLE, commonStyles } from '../../../data/StyleGuides'
 import { IMAGES } from '../../../assets/images'
 import En from '../../../data/locals/En'
 import { KEYBOARD_TYPE, SCREEN } from '../../../data/enums'
+import { useIsFocused } from '@react-navigation/native'; 
+import { signUp } from '../../../services/AuthServices'
+
 
 const SignUpScreen = ({ navigation }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const isFocused = useIsFocused();
+
+    // useEffect to clear fields when screen is focused
+    useEffect(() => {
+        if (!isFocused) {
+            setEmail('');
+            setPassword('');
+        }
+    }, [isFocused]); 
+
+    const handleSignUp = async() => {
+      setLoading(true);
+      await signUp(name, email, password, confirmPassword)
+          .then(() => {
+              setLoading(false);
+          })
+          .catch((error) => {
+              setLoading(false);
+              Alert.alert("Error signing up", error);
+          });
+  };
+  
   return (
     <Scrollable containerStyle={{ height: hp(100) }}>
       <View style={styles.container}>
@@ -16,34 +47,44 @@ const SignUpScreen = ({ navigation }) => {
           <Label style={styles.emailText}>{En.name}</Label>
           <Input
             placeholder={En.enterName}
+            value={name}
+            onChange={(e) => setName(e)}
           />
           <Label style={styles.passwordText}>{En.email}</Label>
           <Input
             placeholder={En.enterEmail}
             keyboard={KEYBOARD_TYPE.EMAIL}
+            value={email}
+            onChange={(e) => setEmail(e)}
           />
 
           <Label style={styles.passwordText}>{En.password}</Label>
           <Input
             isPassword
             placeholder={En.enterPassword}
+            value={password}
+            onChange={(e) => setPassword(e)}
           />
 
           <Label style={styles.passwordText}>{En.confirmPassword}</Label>
           <Input
             isPassword
             placeholder={En.confirmPassword}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e)}
           />
 
-          <View style={styles.footer}>
+          <View style={styles.footer} >
             <Button
               text={En.signUp}
+              onPress={() => handleSignUp()}
+              isLoading={loading}
             />
             <Label style={styles.agreeText}>{En.agreeTerms}</Label>
-            <View style={{ ...commonStyles.horizontalView, alignSelf: 'center',marginTop:hp(0.3) }}>
+            <View style={{ ...commonStyles.horizontalView, alignSelf: 'center', marginTop: hp(0.3) }}>
               <Label>{En.alreadyAccount}</Label>
               <Pressable onPress={() => navigation.navigate(SCREEN.LOGIN)}>
-                <Label style={styles.signUpText}> {En.signUp}</Label>
+                <Label style={styles.signUpText}> {En.signIn}</Label>
               </Pressable>
             </View>
           </View>
@@ -86,9 +127,9 @@ const styles = StyleSheet.create({
   signUpText: {
     color: COLOR.blue
   },
-  agreeText:{
-    textAlign:'center',
-    paddingHorizontal:'7%',
-    marginTop:hp(0.3)
+  agreeText: {
+    textAlign: 'center',
+    paddingHorizontal: '7%',
+    marginTop: hp(0.3)
   }
 })

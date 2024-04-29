@@ -16,6 +16,7 @@ import SearchInput from "./searchInput";
 import MapForwardBtn from "./mapForwardBtn";
 import RadioBtn from "./radioBtn";
 import NewRadioBtn from "./newRadioBtn";
+import Counter from "./counter";
 export {
     Image,
     Input,
@@ -34,5 +35,6 @@ export {
     SearchInput,
     MapForwardBtn,
     RadioBtn,
-    NewRadioBtn
+    NewRadioBtn,
+    Counter
 }

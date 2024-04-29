@@ -16,6 +16,8 @@ const Checkbox = ({text, style, checkStyle}) => {
       <CheckBox
         value={checked}
         onValueChange={toggleCheckbox}
+        style={styles.checkbox}
+        tintColors={{ true: COLOR.blue, false: COLOR.gray }}
       />
       <Text style={[styles.label, style]}>{text}</Text>
     </View>
@@ -31,6 +33,11 @@ const styles = StyleSheet.create({
     ...TEXT_STYLE.smallText,
     marginTop:hp(0.3),
     color:COLOR.white
+  },
+  checkbox: {
+    borderWidth: 2,
+    borderRadius: 4,
+    borderColor: COLOR.blue, // Border color of the checkbox
   },
 });
 

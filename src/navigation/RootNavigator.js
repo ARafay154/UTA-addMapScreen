@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { SCREEN, TAB } from '../data/enums'
-import { BestPlacesScreen, CalenderScreen, ChangePasswordScreen, ChatScreen, CreateRideScreen, InstantBookingScreen, LoginScreen, MapRouteScreen, MapScreen, MapViewScreen, PassengerScreen, PayoutMethodScreen, RiderDetailScreen, SearchCounterScreen, SearchGoingToScreen, SearchLeavingFoamScreen, SignUpScreen, SplashScreen, StopOverScreen, TimeScreen } from '../screens'
+import { BestPlacesScreen, CalenderScreen, ChangePasswordScreen, ChatScreen, CreateRideScreen, DataProtection, HelpScreen, InstantBookingScreen, LoginScreen, MapRouteScreen, MapScreen, MapViewScreen, PassengerScreen, PayoutMethodScreen, RiderDetailScreen, SearchCounterScreen, SearchGoingToScreen, SearchLeavingFoamScreen, SignUpScreen, SplashScreen, StopOverScreen, TimeScreen } from '../screens'
 import BottomNavigator from './BottomNavigator'
 import PriceScreen from '../screens/priceScreen'
 import ReturnRideScreen from '../screens/returnRideScreen'
+import auth from '@react-native-firebase/auth';
+
 
 const Stack = createNativeStackNavigator()
 
@@ -14,12 +16,24 @@ const screenOptionStyle = {
 }
 
 const RootNavigator = () => {
+    const [userLogin, setUserLogin] = useState(false);
+    useEffect(() => {
+        const unsubscribe = auth().onAuthStateChanged(async (user) => {
+            if (user) {
+              setUserLogin(true);
+            } else {
+              setUserLogin(false);
+            }
+          });
+    }, [])
+
+
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={screenOptionStyle}>
-                <Stack.Screen name={SCREEN.SPLASH} component={SplashScreen} />
-                <Stack.Screen name={SCREEN.LOGIN} component={LoginScreen} />
-                <Stack.Screen name={SCREEN.SIGN_UP} component={SignUpScreen} />
+
+            {
+                userLogin ? 
+                <Stack.Navigator screenOptions={screenOptionStyle}>
                 {/* <Stack.Screen name={SCREEN.PROFILE_ABOUT} component={ProfileAboutScreen} /> */}
                 <Stack.Screen name={TAB.BOTTOM} component={BottomNavigator} />
                 <Stack.Screen name={SCREEN.CHANGE_PASSWORD} component={ChangePasswordScreen} />
@@ -41,7 +55,18 @@ const RootNavigator = () => {
                 <Stack.Screen name={SCREEN.TIME} component={TimeScreen} />
                 <Stack.Screen name={SCREEN.PRICE} component={PriceScreen} />
                 <Stack.Screen name={SCREEN.RETURN} component={ReturnRideScreen} />
+                <Stack.Screen name={SCREEN.HELP} component={HelpScreen} />
+                <Stack.Screen name={SCREEN.DATA_PROTECTION} component={DataProtection} />
             </Stack.Navigator>
+            :
+            <Stack.Navigator screenOptions={screenOptionStyle}>
+                <Stack.Screen name={SCREEN.SPLASH} component={SplashScreen} />
+                <Stack.Screen name={SCREEN.LOGIN} component={LoginScreen} />
+                <Stack.Screen name={SCREEN.SIGN_UP} component={SignUpScreen} />
+            </Stack.Navigator>
+
+            }
+            
         </NavigationContainer>
     )
 }

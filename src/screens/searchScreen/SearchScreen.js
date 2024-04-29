@@ -10,8 +10,10 @@ import { SCREEN } from '../../data/enums'
 
 
 const SearchScreen = (props) => {
+
+
     const { navigation } = props
-    const { seats: numberOfSeats = 0 } = props.route.params || {};
+    const { number: numberOfSeats = 0 } = props.route.params || {};
 
     return (
         <Scrollable hasInput containerStyle={styles.container}>
