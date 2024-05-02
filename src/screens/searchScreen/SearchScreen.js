@@ -14,6 +14,8 @@ const SearchScreen = (props) => {
 
     const { navigation } = props
     const { number: numberOfSeats = 0 } = props.route.params || {};
+    const { goingTo, leavingFrom } = props.route.params || { goingTo: null, leavingFrom: null }
+
 
     return (
         <Scrollable hasInput containerStyle={styles.container}>
@@ -33,7 +35,7 @@ const SearchScreen = (props) => {
                         <SVG.Location width={25} height={25} />
                         <View style={{ marginLeft: wp(2) }}>
                             <Label style={styles.leavingText}>{'Leaving from'}</Label>
-                            <Label style={styles.labelColor}>{'leaving From' || ""}</Label>
+                            <Label style={styles.labelColor}>{leavingFrom || ""}</Label>
                         </View>
                     </Pressable>
 
@@ -41,7 +43,7 @@ const SearchScreen = (props) => {
                         <SVG.Location width={25} height={25} />
                         <View style={{ marginLeft: wp(2), }}>
                             <Label style={styles.leavingText}>{'Going To'}</Label>
-                            <Label style={styles.labelColor}>{'leaving To' || ""}</Label>
+                            <Label style={styles.labelColor}>{goingTo || ""}</Label>
                         </View>
                     </Pressable>
 

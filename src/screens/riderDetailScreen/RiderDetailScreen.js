@@ -5,13 +5,14 @@ import { SVG } from '../../assets/svg'
 import { COLOR, commonStyles, TEXT_STYLE, hp } from '../../data/StyleGuides'
 import { IMAGES } from '../../assets/images'
 import En from '../../data/locals/En'
+import { SCREEN } from '../../data/enums'
 
-const RiderDetailScreen = () => {
+const RiderDetailScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <AppHeader
                 leftComp={
-                    <Pressable>
+                    <Pressable onPress={()=>navigation.goBack()}>
                         <SVG.BackArrow />
                     </Pressable>
                 }
@@ -65,7 +66,7 @@ const RiderDetailScreen = () => {
                 <Label style={styles.rideText}>{En.ridesPulish}</Label>
                 <Label style={styles.rideText}>{En.sinceDecember}</Label>
                 <View style={styles.line} />
-                <Pressable>
+                <Pressable onPress={()=>navigation.navigate(SCREEN.BOOK_RIDE)}>
                 <Label style={styles.reportMemberText}>{En.reportMember}</Label>
                 </Pressable>
             </Scrollable>

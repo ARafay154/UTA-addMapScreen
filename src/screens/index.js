@@ -24,6 +24,7 @@ import PassengerScreen from "./passengerScreen";
 import InstantBookingScreen from "./instantBookingScreen";
 import CalenderScreen from "./calenderScreen";
 import TimeScreen from "./timeScreen";
+import BookRideScreen from "./bookRide";
 export {
     SplashScreen,
     LoginScreen,
@@ -50,5 +51,6 @@ export {
     PassengerScreen,
     InstantBookingScreen,
     CalenderScreen,
-    TimeScreen
+    TimeScreen,
+    BookRideScreen
 }

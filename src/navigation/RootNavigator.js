@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { SCREEN, TAB } from '../data/enums'
-import { BestPlacesScreen, CalenderScreen, ChangePasswordScreen, ChatScreen, CreateRideScreen, DataProtection, HelpScreen, InstantBookingScreen, LoginScreen, MapRouteScreen, MapScreen, MapViewScreen, PassengerScreen, PayoutMethodScreen, RiderDetailScreen, SearchCounterScreen, SearchGoingToScreen, SearchLeavingFoamScreen, SignUpScreen, SplashScreen, StopOverScreen, TimeScreen } from '../screens'
+import { BestPlacesScreen, BookRideScreen, CalenderScreen, ChangePasswordScreen, ChatScreen, CreateRideScreen, DataProtection, HelpScreen, InstantBookingScreen, LoginScreen, MapRouteScreen, MapScreen, MapViewScreen, PassengerScreen, PayoutMethodScreen, RiderDetailScreen, SearchCounterScreen, SearchGoingToScreen, SearchLeavingFoamScreen, SignUpScreen, SplashScreen, StopOverScreen, TimeScreen } from '../screens'
 import BottomNavigator from './BottomNavigator'
 import PriceScreen from '../screens/priceScreen'
 import ReturnRideScreen from '../screens/returnRideScreen'
@@ -33,7 +33,7 @@ const RootNavigator = () => {
 
             {
                 userLogin ? 
-                <Stack.Navigator screenOptions={screenOptionStyle}>
+                <Stack.Navigator screenOptions={screenOptionStyle} initialRouteName={SCREEN.BOOK_RIDE}>
                 {/* <Stack.Screen name={SCREEN.PROFILE_ABOUT} component={ProfileAboutScreen} /> */}
                 <Stack.Screen name={TAB.BOTTOM} component={BottomNavigator} />
                 <Stack.Screen name={SCREEN.CHANGE_PASSWORD} component={ChangePasswordScreen} />
@@ -57,6 +57,7 @@ const RootNavigator = () => {
                 <Stack.Screen name={SCREEN.RETURN} component={ReturnRideScreen} />
                 <Stack.Screen name={SCREEN.HELP} component={HelpScreen} />
                 <Stack.Screen name={SCREEN.DATA_PROTECTION} component={DataProtection} />
+                <Stack.Screen name={SCREEN.BOOK_RIDE} component={BookRideScreen} />
             </Stack.Navigator>
             :
             <Stack.Navigator screenOptions={screenOptionStyle}>

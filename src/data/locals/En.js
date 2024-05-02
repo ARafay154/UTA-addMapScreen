@@ -173,7 +173,21 @@ export default {
     "utaHighlighted":" UTA ",
     "bottomText2":"Privacy Policy. By proceeding, you accept our payment provider’s",
     "termsAndHighlighted":" terms and",
-    "conditionHighlighted":" conditions."
+    "conditionHighlighted":" conditions.",
+
+    //requestBookScreen
+    'premierInnLuton':'Premier Inn Luton Town Hotel Regent Street,Luton,UK',
+    'fromDeparture':'45 km from your departure',
+    'goldenWay':'Golden Way, Urmston, Manchester, UK',
+    'urmston':'Urmston',
+    'totalPrice':'Total price for 1 passenger',
+    'contactAlston':'Contact Alston',
+    "yourBooking":"Your booking won’t be confirmed until the driver approves your request",
+    'cupraFormentor':'CUPRA FORMENTOR',
+    'black':'Black',
+    'shareRide':'Share ride',
+    'reportRide':'Report ride',
+    'requestBook':'Request to book',
 
 
 

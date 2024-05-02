@@ -16,7 +16,9 @@ export const COLOR = {
    blue:'#0568EA',
    pink:'#EA00FF',
    lightGrey:'#646262',
-   green:'#1BA449'
+   green:'#1BA449',
+   orange:'#F78B00',
+   yellow:'#F7C100',
 
 }
 

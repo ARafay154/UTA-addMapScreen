@@ -4,7 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 export const login = (email, password) => {
     return new Promise((resolve, reject) => {
         if (email.trim() === "" || password.trim() === "") {
-            reject("Enter Valid Data");
+            reject("Enter email: test@gmail.com   Password:Test@123");
             return;
         }
 
@@ -18,19 +18,21 @@ export const login = (email, password) => {
     });
 };
 
+
+
 export const signUp = (name, email, password, confirmPassword) => {
     return new Promise((resolve, reject) => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-        if (!passwordRegex.test(password)) {
-            reject("Password must have at least 8 characters, 1 letter, 1 number, and 1 special character");
-            return;
-        }
         if (name.trim() === "" || email.trim() === "" || password.trim() === "" || confirmPassword.trim() === "") {
             reject("Enter Valid Data");
             return;
         }
-
+        if (!passwordRegex.test(password)) {
+            reject("Password must have at least 8 characters, 1 letter, 1 number, and 1 special character");
+            return;
+        }
+        
         if (password !== confirmPassword) {
             reject("Ensure Passwords Match");
             return;

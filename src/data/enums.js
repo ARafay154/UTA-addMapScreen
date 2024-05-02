@@ -23,7 +23,8 @@ export const SCREEN = {
   CALENDER:'CalenderScreen',
   TIME:"TimeScreen",
   PRICE:'PriceScreen',
-  RETURN:'ReturnRideScreen'
+  RETURN:'ReturnRideScreen',
+  BOOK_RIDE:"BookRideScreen"
 }
 export const TAB = {
   BOTTOM: 'BottomNavigator',

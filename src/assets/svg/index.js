@@ -39,7 +39,9 @@ import BellIcon from './bellIcon.svg'
 import Electric from './electric.svg'
 import DownArrow from './downArrow.svg'
 import LineCircle from "./lineCircle.svg"
-import { Line } from 'react-native-svg'
+import StraightLine from './straightLine.svg'
+import Download from './downloadIcon.svg'
+import SecurityIcon from './securityIcon.svg'
 
 
 export const SVG = {
@@ -83,5 +85,8 @@ CounterMinusActive,
 BellIcon,
 Electric,
 DownArrow,
-LineCircle
+LineCircle,
+StraightLine,
+Download,
+SecurityIcon
 }
