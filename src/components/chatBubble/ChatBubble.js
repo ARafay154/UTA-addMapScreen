@@ -4,26 +4,29 @@ import LinearGradient from 'react-native-linear-gradient'
 import { COLOR, TEXT_STYLE, commonStyles, hp, wp } from '../../data/StyleGuides'
 import { Image, Label, Pressable } from '../reusables'
 import { SVG } from '../../assets/svg'
+import { SCREEN } from '../../data/enums'
 
-const ChatBubble = (props) => {
+const ChatBubble = ({ item, loggedInUser, navigation }) => {
 
-  const {item} = props
+  
+
+
   return (
     <LinearGradient
-    colors={[COLOR.blue, COLOR.pink]}
-    locations={[0.45, 1]}
-    style={styles.linearGradient}
-    start={{ x: 0, y: 7 }}
-    end={{ x: 1.2, y: 0.5 }}>
+      colors={[COLOR.blue, COLOR.pink]}
+      locations={[0.45, 1]}
+      style={styles.linearGradient}
+      start={{ x: 0, y: 7 }}
+      end={{ x: 1.2, y: 0.5 }}>
 
 
-    <Pressable onPress={() => props.onpress()} style={styles.innerContainer}>
-        <Image src={item.image} style={styles.imageView} contain />
-        <Label style={styles.userName}>{item.name}</Label>
+      <Pressable onPress={() => navigation.navigate(SCREEN.CHAT, { receiver: item, sender: loggedInUser })} style={styles.innerContainer}>
+        <Image url={item.Image} style={styles.imageView} contain />
+        <Label style={styles.userName}>{item.Name}</Label>
         <SVG.ForwardActive />
-    </Pressable>
+      </Pressable>
 
-</LinearGradient>
+    </LinearGradient>
   )
 }
 
@@ -33,16 +36,20 @@ const styles = StyleSheet.create({
   linearGradient: {
     marginTop: hp(2),
     paddingHorizontal: wp(3),
-   paddingVertical:hp(1.5),
+    paddingVertical: hp(1.5),
     borderRadius: hp(2),
     marginHorizontal: wp(6)
-},
-userName: {
+  },
+  userName: {
     marginRight: "auto",
     marginLeft: wp(5),
     ...TEXT_STYLE.bigTextBold
-},
-innerContainer:{
+  },
+  innerContainer: {
     ...commonStyles.justifyView,
-}
+  },
+  imageView: {
+    borderRadius: wp(10),
+
+  }
 })

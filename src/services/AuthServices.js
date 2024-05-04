@@ -4,7 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 export const login = (email, password) => {
     return new Promise((resolve, reject) => {
         if (email.trim() === "" || password.trim() === "") {
-            reject("Enter email: test@gmail.com   Password:Test@123");
+            reject("Enter valid data");
             return;
         }
 
@@ -17,7 +17,6 @@ export const login = (email, password) => {
             });
     });
 };
-
 
 
 export const signUp = (name, email, password, confirmPassword) => {
@@ -43,14 +42,21 @@ export const signUp = (name, email, password, confirmPassword) => {
                 if (emailExists && emailExists.length > 0) {
                     reject("Email already in use");
                 } else {
-                    return firestore().collection('Users').add({
-                        Name: name,
-                        Email: email,
-                    });
+                    // Create user in Firebase Authentication
+                    return auth().createUserWithEmailAndPassword(email, password)
+                        .then((userCredential) => {
+                            // Get the UID from the UserCredential
+                            const uid = userCredential.user.uid;
+
+                            // Create user in Firestore
+                            return firestore().collection('Users').doc(uid).set({
+                                Name: name,
+                                Email: email,
+                                Image: "",
+                                UID: uid, 
+                            });
+                        });
                 }
-            })
-            .then(() => {
-                return auth().createUserWithEmailAndPassword(email, password);
             })
             .then(() => {
                 resolve("User Created");

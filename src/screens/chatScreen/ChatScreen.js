@@ -1,13 +1,88 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { AppHeader, Image, Input, Label, Pressable } from '../../components'
 import { SVG } from '../../assets/svg'
-import { IMAGES } from '../../assets/images'
 import { COLOR, TEXT_STYLE, commonStyles, hp, wp } from '../../data/StyleGuides'
 import { dummyMessages } from '../../data/dummyData'
 import LinearGradient from 'react-native-linear-gradient'
+import firestore from '@react-native-firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 
-const ChatScreen = ({ navigation }) => {
+
+const ChatScreen = (props) => {
+
+    const { navigation } = props
+    const sender = props.route.params.sender
+    const receiver = props.route.params.receiver
+
+    //    console.log("sender",sender)
+    //    console.log("receiver", receiver)
+
+    const [text, setText] = useState("")
+    const [messages, setMessages] = useState([])
+
+
+    const getAllmessages = async () => {
+        const docid = receiver.UID > sender.UID ? sender.UID + '-' + receiver.UID : receiver.UID + '-' + sender.UID;
+        const querySnap = await firestore().collection('chatRoom')
+            .doc(docid)
+            .collection('chat')
+            .orderBy('createdAt', "desc")
+            .get()
+        const allmsg = querySnap.docs.map(docSnap => {
+            return {
+                ...docSnap.data(),
+                createdAt: docSnap.data().createdAt.toDate()
+            }
+
+        })
+
+        // Sort messages by creation time before setting them in state
+        const sortedMessages = allmsg.sort((a, b) => b.createdAt - a.createdAt);
+        setMessages(sortedMessages);
+    }
+
+
+
+    useEffect(() => {
+        getAllmessages()
+    }, []);
+
+    console.log(messages)
+
+
+
+    const sendMessage = () => {
+        const docid = receiver.UID > sender.UID ? sender.UID + '-' + receiver.UID : receiver.UID + '-' + sender.UID;
+        const messageRef = firestore().collection('chatRoom').doc(docid).collection('chat');
+
+        const myMsg = {
+            sentBy: sender.UID,
+            sentTo: receiver.UID,
+            message: text,
+            createdAt: new Date(),
+            // Add other properties if needed
+        };
+
+        messageRef.add({
+            ...myMsg,
+            createdAt: firestore.FieldValue.serverTimestamp(),
+        })
+            .then(() => {
+                console.log("Message sent successfully");
+            })
+            .catch((error) => {
+                console.error("Error sending message: ", error);
+            });
+
+        // Update local state
+        setMessages(previousMessages => [myMsg, ...previousMessages]);
+        setText('');
+    };
+
+
+
+
     return (
         <View style={styles.container}>
             <AppHeader
@@ -18,22 +93,22 @@ const ChatScreen = ({ navigation }) => {
                 }
                 centerComp={
                     <View style={styles.headerDetail}>
-                        <Image src={IMAGES.SmallProfile} style={styles.imageView} contain />
-                        <Label style={styles.userName}>John Herry</Label>
+                        <Image url={receiver.Image} style={styles.imageView} contain />
+                        <Label style={styles.userName}>{receiver.Name}</Label>
                     </View>
                 }
             />
 
             <ScrollView style={styles.chatDetailsContainer}>
-                {dummyMessages.map((message, index) => (
+                {messages.slice(0).reverse().map((message, index) => (
                     <LinearGradient
                         key={index}
                         colors={[COLOR.blue, COLOR.pink]}
                         start={{ x: 0, y: 0 }}
                         end={{ x: 1, y: 0 }}
-                        style={[styles.messageContainer, message.isSender ? styles.senderMessage : styles.receiverMessage]}>
+                        style={[styles.messageContainer, message.sentBy === sender.UID ? styles.senderMessage : styles.receiverMessage]}>
 
-                        <Label style={styles.messageText}>{message.text}</Label>
+                        <Label style={styles.messageText}>{message.message}</Label>
                     </LinearGradient>
                 ))}
             </ScrollView>
@@ -44,8 +119,10 @@ const ChatScreen = ({ navigation }) => {
                     placeholder={'Send a message'}
                     placeholderTextColor={COLOR.lightGrey}
                     style={styles.inputMainContainer}
+                    value={text}
+                    onChange={(e) => setText(e)}
                 />
-                <Pressable style={styles.sendMsgBtn}>
+                <Pressable style={styles.sendMsgBtn} onPress={() => sendMessage({ message: text })}>
                     <SVG.SendMsg width={20} height={20} />
                 </Pressable>
             </View>
@@ -117,7 +194,8 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR.blue,
     },
     imageView: {
-        width: wp(15),
-        height: hp(10)
+        width: wp(14),
+        height: hp(7),
+        borderRadius: wp(14)
     }
 })
