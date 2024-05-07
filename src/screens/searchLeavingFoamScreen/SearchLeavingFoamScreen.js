@@ -8,21 +8,24 @@ import { leavingData } from '../../data/dummyData'
 import firestore from '@react-native-firebase/firestore';
 
 const SearchLeavingFoamScreen = ({ navigation }) => {
-    const [location, setLocation] = useState([]);
+  
+    // const [location, setLocation] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const querySnapshot = await firestore().collection('Trip').get();
-                const data = querySnapshot.docs.map(doc => doc.data());
-                setLocation(data);
-            } catch (error) {
-                console.error("Error fetching data: ", error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const querySnapshot = await firestore().collection('Trip').get();
+    //             const data = querySnapshot.docs.map(doc => doc.data());
+    //             setLocation(data);
+    //         } catch (error) {
+    //             console.error("Error fetching data: ", error);
+    //         }
+    //     };
 
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, []);
+
+    
 
     return (
         <View style={styles.container}>
@@ -32,7 +35,7 @@ const SearchLeavingFoamScreen = ({ navigation }) => {
                 rightComp={<Pressable><SVG.Cross /></Pressable>}
             />
             <Scrollable containerStyle={styles.containerStyle}>
-                {location.map((item, index) => (
+                {leavingData.map((item, index) => (
                     <LeavingView item={item} key={index} />
                 ))}
             </Scrollable>

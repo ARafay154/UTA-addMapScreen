@@ -69,11 +69,11 @@ export default {
     'age':'59 y/o',
     'experience':'Experience level: Intermediate',
     'drivingSkill':'3/3-Good driving skills',
-    'alstonVerified':'Alston has a Verified Profile',
+    'alstonVerified':'has a Verified Profile',
     'verifiedId':'Verified ID',
     'confirmedEmail':'Confirmed email',
     'confirmedNumber':'Confirmed phone number',
-    'aboutAlston':'About Alston',
+    'aboutAlston':'About',
     'loremText':'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     'noSmoking':'No smoking,please',
     "preferNotTravel":"I’d prefer not to travel with pets",
@@ -181,7 +181,7 @@ export default {
     'goldenWay':'Golden Way, Urmston, Manchester, UK',
     'urmston':'Urmston',
     'totalPrice':'Total price for 1 passenger',
-    'contactAlston':'Contact Alston',
+    'contactAlston':'Contact ',
     "yourBooking":"Your booking won’t be confirmed until the driver approves your request",
     'cupraFormentor':'CUPRA FORMENTOR',
     'black':'Black',
@@ -189,6 +189,11 @@ export default {
     'reportRide':'Report ride',
     'requestBook':'Request to book',
 
+    //leavingFrom screen
+    'lahore':'Pakistan, Lahore',
+    'karachi':'Pakistan, Karachi',
+    'islamabad':'Pakistan, Islamabad',
+    'multan':'Pakistan, Multan',
 
 
 

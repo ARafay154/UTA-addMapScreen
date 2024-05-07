@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { COLOR, TEXT_STYLE, commonStyles, hp } from '../../data/StyleGuides'
+import { COLOR, TEXT_STYLE, commonStyles, hp, wp } from '../../data/StyleGuides'
 import { AppHeader, Button, Image, Label, Pressable, Scrollable } from '../../components'
 import { SVG } from '../../assets/svg'
 import En from '../../data/locals/En'
 import { IMAGES } from '../../assets/images'
+import { useSelector } from 'react-redux'
 
 const BookRideScreen = ({ navigation }) => {
+  const userData = useSelector((state) => state.user)
   return (
     <View style={styles.container}>
       <AppHeader
@@ -64,14 +66,14 @@ const BookRideScreen = ({ navigation }) => {
                 <View style={styles.pessengerView}>
                     <View>
 
-                        <Label style={styles.alstonText}>{'Alston'}</Label>
+                        <Label style={styles.alstonText}>{userData.Name}</Label>
                         <View style={styles.ratingStyle}>
                             <SVG.RatingStar />
                             <Label style={styles.ratingText}>{'5/5-2 ratings'}</Label>
                         </View>
                     </View>
                     <View style={styles.ratingStyle}>
-                        <Image src={IMAGES.SmallProfile} style={styles.imageView} />
+                        <Image url={userData.Image} style={styles.imageView} />
                         <SVG.ForwardActive />
                     </View>
 
@@ -83,7 +85,7 @@ const BookRideScreen = ({ navigation }) => {
                 <View style={styles.line} />
                 <Label style={styles.loremStyle}>{En.loremText}</Label>
                 <Pressable>
-                <Label style={styles.contactText}>{En.contactAlston}</Label>
+                <Label style={styles.contactText}>{En.contactAlston}{userData.Name}</Label>
                 </Pressable>
                 <View style={styles.line} />
                 <Label style={styles.loremStyle}>{En.yourBooking}</Label>
@@ -201,6 +203,7 @@ const styles = StyleSheet.create({
   imageView: {
     height: hp(6),
     width: hp(6),
+    borderRadius:wp(6),
     marginRight: hp(2),
   },
   loremStyle: {

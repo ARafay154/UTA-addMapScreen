@@ -2,17 +2,19 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { AppHeader, Image, Label, Pressable, Scrollable } from '../../components'
 import { SVG } from '../../assets/svg'
-import { COLOR, commonStyles, TEXT_STYLE, hp } from '../../data/StyleGuides'
+import { COLOR, commonStyles, TEXT_STYLE, hp, wp } from '../../data/StyleGuides'
 import { IMAGES } from '../../assets/images'
 import En from '../../data/locals/En'
 import { SCREEN } from '../../data/enums'
+import { useSelector } from 'react-redux'
 
-const RiderDetailScreen = ({navigation}) => {
+const RiderDetailScreen = ({ navigation }) => {
+    const userData = useSelector((state) => state.user)
     return (
         <View style={styles.container}>
             <AppHeader
                 leftComp={
-                    <Pressable onPress={()=>navigation.goBack()}>
+                    <Pressable onPress={() => navigation.goBack()}>
                         <SVG.BackArrow />
                     </Pressable>
                 }
@@ -20,21 +22,21 @@ const RiderDetailScreen = ({navigation}) => {
             <Scrollable containerStyle={styles.mainView}>
                 <View style={styles.profileView}>
                     <View>
-                        <Label style={styles.profileName}>{En.alston}</Label>
+                        <Label style={styles.profileName}>{userData.Name}</Label>
                         <Label style={styles.ageText}>{En.age}</Label>
                     </View>
-                    <Image src={IMAGES.SmallProfile} contain style={styles.profileImage} />
+                    <Image url={userData.Image} style={styles.profileImage} />
                 </View>
                 <Label style={styles.experienceText}>{En.experience}</Label>
-                <View style={styles.ratingView}>
+                <Pressable style={styles.ratingView} onPress={() => navigation.navigate(SCREEN.BOOK_RIDE)}>
                     <View style={{ ...commonStyles.horizontalView, marginBottom: hp(0.3) }}>
                         <SVG.RatingStar />
                         <Label style={styles.ratingText}>{'5/5-2 ratings'}</Label>
                     </View>
                     <SVG.ForwardActive />
-                </View>
+                </Pressable>
                 <Label style={styles.experienceText}>{En.drivingSkill}</Label>
-                <Label style={styles.verifyText}>{En.alstonVerified}</Label>
+                <Label style={styles.verifyText}>{userData.Name} {En.alstonVerified}</Label>
                 <View style={styles.verifiedStyle}>
                     <SVG.Verified />
                     <Label style={styles.idText}>{En.verifyId}</Label>
@@ -48,7 +50,7 @@ const RiderDetailScreen = ({navigation}) => {
                     <Label style={styles.idText}>{En.confirmPhoneNumber}</Label>
                 </View>
                 <View style={styles.line} />
-                <Label style={styles.verifyText}>{En.aboutAlston}</Label>
+                <Label style={styles.verifyText}>{En.aboutAlston} {userData.Name}</Label>
                 <Label style={styles.loremText}>{En.loremText}</Label>
                 <View style={styles.verifiedStyle}>
                     <SVG.NoSmoking />
@@ -66,8 +68,8 @@ const RiderDetailScreen = ({navigation}) => {
                 <Label style={styles.rideText}>{En.ridesPulish}</Label>
                 <Label style={styles.rideText}>{En.sinceDecember}</Label>
                 <View style={styles.line} />
-                <Pressable onPress={()=>navigation.navigate(SCREEN.BOOK_RIDE)}>
-                <Label style={styles.reportMemberText}>{En.reportMember}</Label>
+                <Pressable >
+                    <Label style={styles.reportMemberText}>{En.reportMember}</Label>
                 </Pressable>
             </Scrollable>
         </View>
@@ -88,8 +90,9 @@ const styles = StyleSheet.create({
         ...commonStyles.justifyView
     },
     profileImage: {
-        height: hp(8),
-        width: hp(8),
+        width:wp(18),
+        height:hp(9),
+        borderRadius: wp(18),
         marginRight: hp(2)
     },
     profileName: {
@@ -140,9 +143,9 @@ const styles = StyleSheet.create({
         color: COLOR.lightGrey,
         marginTop: hp(1)
     },
-    reportMemberText:{
+    reportMemberText: {
         ...TEXT_STYLE.textBold,
-        color:COLOR.blue,
-        marginTop:hp(2)
+        color: COLOR.blue,
+        marginTop: hp(2)
     }
 })

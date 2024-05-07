@@ -33,7 +33,6 @@ const Input = (props) => {
                     <Pressable onPress={toggleShowPassword}>
                         <SvgItem name={iconName} size={iconSize} />
                     </Pressable>
-
                 </If>
             </View>
         </LinearGradient>

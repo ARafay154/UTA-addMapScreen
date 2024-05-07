@@ -7,8 +7,12 @@ import { SVG } from '../../assets/svg'
 import { IMAGES } from '../../assets/images'
 import { useNavigation } from '@react-navigation/native';
 import { SCREEN } from '../../data/enums'
+import { useSelector } from 'react-redux'
+
 
 const RideDetailView = ({ item }) => {
+    const userData = useSelector((state) => state.user)
+    console.log("riderUserData",userData)
     const navigation = useNavigation()
     const { timing, timeDuration, to, from, price, coupleIcon, manActiveIcon, manNonActiveIcon, pointToAndFromIcon, ratingStarIcon, profileImage } = item
     return (
@@ -64,9 +68,9 @@ const RideDetailView = ({ item }) => {
 
             <View style={styles.secondView}>
                 <View style={{ ...commonStyles.horizontalView }}>
-                    <Image src={IMAGES.SmallProfile} style={styles.imageView} />
+                    <Image url={userData.Image} style={styles.imageView} />
                     <View style={{ marginLeft: hp(1.2) }}>
-                        <Label style={{ ...TEXT_STYLE.textMedium }}>{'Alston'}</Label>
+                        <Label style={{ ...TEXT_STYLE.textMedium }}>{userData.Name}</Label>
                         <View style={{ ...commonStyles.horizontalView }}>
                             <SVG.RatingStar />
                             <Label style={{ marginLeft: '10%', marginTop: '8%' }}>{'5'}</Label>
@@ -103,7 +107,8 @@ const styles = StyleSheet.create({
     },
     imageView: {
         height: hp(6),
-        width: hp(6)
+        width: hp(6),
+        borderRadius:hp(6)
     },
     
 })

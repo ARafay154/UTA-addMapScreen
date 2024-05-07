@@ -6,7 +6,11 @@ import { SVG } from '../../assets/svg'
 import En from '../../data/locals/En'
 import { leavingData } from '../../data/dummyData'
 
-const SearchLeavingToScreen = ({navigation}) => {
+const SearchLeavingToScreen = (props) => {
+
+    const {navigation} = props
+    const { from } = props.route.params;
+    const filteredData = leavingData.filter(item => item.text !== from);
   return (
     <View style={styles.container}>
         <AppHeader 
@@ -15,7 +19,7 @@ const SearchLeavingToScreen = ({navigation}) => {
         rightComp={<Pressable><SVG.Cross/></Pressable>}
         />
         <Scrollable containerStyle={styles.containerStyle}>
-        {leavingData?.map((item, index) => (
+        {filteredData?.map((item, index) => (
                 <LeavingView item={item} key={index} />
             ))}
         </Scrollable>

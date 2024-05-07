@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         borderRadius: hp(3),
         ...commonStyles.horizontalView,
         ...commonStyles.center,
-        backgroundColor: COLOR.blue,
+        backgroundColor: 'blue',
         ...commonStyles.borderStyle,
     },
     titleStyle: {

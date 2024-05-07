@@ -48,10 +48,10 @@ export const rateData = [
 ]
 
 export const leavingData = [
-    { text: En.airportCity, subText: En.arrivalCity, icon: <SVG.ForwardActive /> },
-    { text: En.airportCity, subText: En.arrivalCity, icon: <SVG.ForwardActive /> },
-    { text: En.airportCity, subText: En.arrivalCity, icon: <SVG.ForwardActive /> },
-    { text: En.airportCity, subText: En.arrivalCity, icon: <SVG.ForwardActive /> },
+    { text: En.lahore, subText: En.lahore, icon: <SVG.ForwardActive />, route:TAB.SEARCH },
+    { text: En.karachi, subText: En.karachi, icon: <SVG.ForwardActive />,route:TAB.SEARCH },
+    { text: En.multan, subText: En.multan, icon: <SVG.ForwardActive />,route:TAB.SEARCH },
+    { text: En.islamabad, subText: En.islamabad, icon: <SVG.ForwardActive />,route:TAB.SEARCH },
 
 ]
 

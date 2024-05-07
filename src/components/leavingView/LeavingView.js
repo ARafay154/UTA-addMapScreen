@@ -7,14 +7,14 @@ import { SVG } from '../../assets/svg';
 import { SCREEN, TAB } from '../../data/enums';
 
 const LeavingView = ({ item }) => {
-    const { text, icon, subText } = item
+    const { text, icon, subText,route } = item
     const navigation = useNavigation()
     return (
         <View style={styles.container}>
-            <Pressable style={styles.mainView} onPress={()=>navigation.navigate(TAB.SEARCH, { leavingFrom: item.leavingFrom, goingTo: item.goingTo })}>
+            <Pressable style={styles.mainView} onPress={()=>navigation.navigate(route, { from: text})}>
                 <View style={styles.textContainer}>
-                    <Label style={styles.textStyle}>{item.leavingFrom}</Label>
-                    <Label style={styles.subStyle}>Arrivals, {item.goingTo}</Label>
+                    <Label style={styles.textStyle}>{text}</Label>
+                    <Label style={styles.subStyle}>Arrivals, {subText}</Label>
                 </View>
                 <SVG.ForwardIcon />
             </Pressable>

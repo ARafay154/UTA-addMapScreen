@@ -64,7 +64,7 @@ const LoginScreen = ({ navigation }) => {
                             text={En.rememberDays}
                             checkStyle={{ marginVertical: hp(1) }}
                         />
-                        <Pressable>
+                        <Pressable onPress={()=>navigation.navigate(SCREEN.FORGOT)}>
                             <Label style={{ ...TEXT_STYLE.smallText }}>{En.forgotPassword}</Label>
                         </Pressable>
                     </View>

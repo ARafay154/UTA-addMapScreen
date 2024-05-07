@@ -14,7 +14,10 @@ const SearchScreen = (props) => {
 
     const { navigation } = props
     const { number: numberOfSeats = 0 } = props.route.params || {};
-    const { goingTo, leavingFrom } = props.route.params || { goingTo: null, leavingFrom: null }
+    const { from: leavingFrom = "" } = props.route.params || {};
+    
+
+    // console.log("PROPS",props)
 
 
     return (
@@ -35,15 +38,15 @@ const SearchScreen = (props) => {
                         <SVG.Location width={25} height={25} />
                         <View style={{ marginLeft: wp(2) }}>
                             <Label style={styles.leavingText}>{'Leaving from'}</Label>
-                            <Label style={styles.labelColor}>{leavingFrom || ""}</Label>
+                            <Label style={styles.labelColor}>{leavingFrom}</Label>
                         </View>
                     </Pressable>
 
-                    <Pressable style={styles.travelingView} onPress={()=>navigation.navigate(SCREEN.GOING_TO)}>
+                    <Pressable style={styles.travelingView} onPress={() => navigation.navigate(SCREEN.GOING_TO,{from:leavingFrom})}>
                         <SVG.Location width={25} height={25} />
                         <View style={{ marginLeft: wp(2), }}>
                             <Label style={styles.leavingText}>{'Going To'}</Label>
-                            <Label style={styles.labelColor}>{goingTo || ""}</Label>
+                            <Label style={styles.labelColor}>{"goingTo" || ""}</Label>
                         </View>
                     </Pressable>
 
